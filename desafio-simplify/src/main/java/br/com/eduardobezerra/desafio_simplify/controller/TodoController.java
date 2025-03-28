@@ -2,6 +2,7 @@ package br.com.eduardobezerra.desafio_simplify.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.eduardobezerra.desafio_simplify.entity.Todo;
@@ -17,7 +18,7 @@ public class TodoController {
     }
 
     @PostMapping
-    List<Todo> create(@RequestBody Todo todo) {
+    List<Todo> create(@RequestBody List<Todo> todo) {
         return todoService.create(todo);
     }
 
@@ -26,7 +27,14 @@ public class TodoController {
         return todoService.list();
     }
 
-    @PutMapping
+    @GetMapping("/{id}")
+    public ResponseEntity<Todo> buscarTodo(@PathVariable Long id) {
+        return todoService.buscarTodoPorId(id)
+        .map(ResponseEntity::ok)
+        .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping()
     List<Todo> update(@RequestBody Todo todo) {
         return todoService.update(todo);
     }

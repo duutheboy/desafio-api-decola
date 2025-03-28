@@ -16,8 +16,8 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public Categoria criarCategoria(@RequestBody Categoria categoria) {
-        return categoriaService.criarCategoria(categoria);
+        public List<Categoria> criarCategorias(@RequestBody List<Categoria> categorias) {
+        return categoriaService.criarCategorias(categorias);
     }
 
     @GetMapping
@@ -32,9 +32,9 @@ public class CategoriaController {
             .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{id}")
-    public Categoria atualizarCategoria(@PathVariable Long id, @RequestBody Categoria categoria) {
-        return categoriaService.atualizarCategoria(id, categoria);
+    @PutMapping()
+    public Categoria atualizarCategoria(@RequestBody Categoria categoria) {
+        return categoriaService.atualizarCategoria(categoria);
     }
 
     @DeleteMapping("/{id}")

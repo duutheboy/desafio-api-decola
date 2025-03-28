@@ -15,8 +15,8 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public Categoria criarCategoria(Categoria categoria) {
-        return categoriaRepository.save(categoria);
+    public List<Categoria> criarCategorias(List<Categoria> categorias) {
+        return categoriaRepository.saveAll(categorias);
     }
 
     public List<Categoria> listarCategorias() {
@@ -27,14 +27,8 @@ public class CategoriaService {
         return categoriaRepository.findById(id);
     }
 
-    public Categoria atualizarCategoria(Long id, Categoria categoriaAtualizada) {
-        return categoriaRepository.findById(id)
-            .map(categoriaExistente -> {
-                categoriaExistente.setNome(categoriaAtualizada.getNome());
-                categoriaExistente.setDescricao(categoriaAtualizada.getDescricao());
-                return categoriaRepository.save(categoriaExistente);
-            })
-            .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+    public Categoria atualizarCategoria(Categoria categoriaAtualizada) {
+        return categoriaRepository.save(categoriaAtualizada);
     }
 
     public void deletarCategoria(Long id) {
